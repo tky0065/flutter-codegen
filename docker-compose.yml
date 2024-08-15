@@ -1,0 +1,9 @@
+services:
+  dartApiCodegen:
+    image: "openapitools/openapi-generator-cli:latest"
+    container_name: openapi_codegen_dart_dio
+    command: java -jar modules/openapi-generator-cli/target/openapi-generator-cli.jar generate -i "http://local:8080/v3/api-doc" -g dart-dio-next -o /tmp/codegen/ --skip-validate-spec -c /tmp/config.yml
+    volumes:
+      - ./generated:/tmp/codegen
+      - ./codegen-config.yml:/tmp/config.yml
+    working_dir: /opt/openapi-generator
